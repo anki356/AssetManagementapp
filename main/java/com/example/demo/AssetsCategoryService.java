@@ -8,26 +8,28 @@ import org.springframework.stereotype.Service;
 public class AssetsCategoryService   
 {  
 @Autowired  
-AssetsCategoryRepository assetscategoryrepository;  
+AssetsCategoryRepository assetscategoryrepository;
+//AssetsRepository assetsRepository;
 //getting all student records  
-public List<AssetsCategory> getAllAssets()   
+public List<AssetsCategory> getAllAssetsCategory()   
 {  
 List<AssetsCategory> assets = new ArrayList<AssetsCategory>();  
 assetscategoryrepository.findAll().forEach(AssetsCategory->assets.add(AssetsCategory)); 
 return assets;
 }  
 //getting a specific record  
-public AssetsCategory getAssetsById(int id)   
+public AssetsCategory getAssetsCaegoryById(int id)   
 {  
 return assetscategoryrepository.findById(id).get();  
 }  
-public void saveOrUpdate(AssetsCategory assets)   
+public void saveOrUpdateAssetscategory(AssetsCategory assets)   
 {  
 	assetscategoryrepository.save(assets);  
 }  
 //deleting a specific record  
-public void delete(int id)   
+public void deleteAssetsCategory(int id)   
 {  
 	assetscategoryrepository.deleteById(id);  
-}  
+} 
+
 }  

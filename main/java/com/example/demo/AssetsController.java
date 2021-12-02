@@ -15,29 +15,55 @@ public class AssetsController
 {  
 //autowired the AssetsCategoryService class  
 @Autowired  
-AssetsCategoryService assetsCategoryService;  
+AssetsCategoryService assetsCategoryService;
+@Autowired  
+AssetsService assetsservice;
+
 //creating a get mapping that retrieves all the students detail from the database   
 @GetMapping("/assetscategories")  
-private List<AssetsCategory> getAllassets()   
+private List<AssetsCategory> getAllassetsCategory()   
 {  
-return assetsCategoryService.getAllAssets();  
+return assetsCategoryService.getAllAssetsCategory();  
 }  
 //creating a get mapping that retrieves the detail of a specific student  
 @GetMapping("/assetcategory/{id}")  
-private AssetsCategory getAssets(@PathVariable("id") int id)   
+private AssetsCategory getAssetsCategory(@PathVariable("id") int id)   
 {  
-return assetsCategoryService.getAssetsById(id);  
+return assetsCategoryService.getAssetsCaegoryById(id);  
 }  
 //creating a delete mapping that deletes a specific student  
 @DeleteMapping("/assetscategory/{id}")  
-private void deleteAssets(@PathVariable("id") int id) { 
-assetsCategoryService.delete(id);  
+private void deleteAssetsCategory(@PathVariable("id") int id) { 
+assetsCategoryService.deleteAssetsCategory(id);  
 }  
 //creating post mapping that post the student detail in the database  
 @PostMapping("/assetscategories")  
-private int saveAssets(@RequestBody AssetsCategory assets)   
+private int saveAssetsCategory(@RequestBody AssetsCategory assets)   
 {  
-	assetsCategoryService.saveOrUpdate(assets);  
+	assetsCategoryService.saveOrUpdateAssetscategory(assets);  
 return assets.getId();  
+}  
+@GetMapping("/assets")
+private List<Assets> getAllassets()   
+{  
+return assetsservice.getAllAssets();
+}  
+//creating a get mapping that retrieves the detail of a specific student  
+@GetMapping("/asset/{id}")  
+private Assets getAssets(@PathVariable("id") String id)   
+{  
+return assetsservice.getAssetsById(id);  
+}  
+//creating a delete mapping that deletes a specific student  
+@DeleteMapping("/assets/{name}")  
+private void deleteAssets(@PathVariable("name") String name) { 
+assetsservice.deleteAssets(name);  
+}  
+//creating post mapping that post the student detail in the database  
+@PostMapping("/assets")  
+private String saveAssets(@RequestBody Assets assets)   
+{  
+	assetsservice.saveOrUpdateAssets(assets);  
+return assets.getName();  
 }  
 }  
