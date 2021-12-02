@@ -1,6 +1,7 @@
 package com.example.demo;  
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;  
 //mark class as an Entity 
 
@@ -38,6 +40,7 @@ private String assignmentStatus;
 @ManyToOne(fetch = FetchType.LAZY,optional = false)
 @JoinColumn(name="Category",referencedColumnName = "name",insertable = false,updatable = false)
 private AssetsCategory assetscategory;
+
 public String getName() {
 	return name;
 }
@@ -65,6 +68,7 @@ public void setCategory(String category) {
 public String getAssignmentStatus() {
 	return assignmentStatus;
 }
+
 public void setAssignmentStatus(int assignmentStatus) {
 	switch (assignmentStatus) {
 	case 0:

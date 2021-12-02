@@ -9,6 +9,8 @@ public class AssetsService
 {  
 @Autowired  
 AssetsRepository assetsrepository;
+@Autowired  
+Employeerepository employeerepository;
 //AssetsRepository assetsRepository;
 //getting all student records  
 public List<Assets> getAllAssets()   
@@ -28,8 +30,34 @@ public void saveOrUpdateAssets(Assets assets)
 }  
 //deleting a specific record  
 public void deleteAssets(String name)   
-{  
-	assetsrepository.deleteById(name);  
+{  Assets assets=assetsrepository.findById(name).get(); 
+if(assets.getAssignmentStatus()=="Recovered") {
+	assetsrepository.deleteById(name); 
+}
+	 
 } 
+
+public String assigntoEmloyee(Employee employee)   
+{  
+	assetsrepository.findById(employee.getAssetname()).get().setAssignmentStatus(1);
+    String name=employeerepository.findById(employee.getId()).get().getName();
+    String role=employeerepository.findById(employee.getId()).get().getRole();
+    
+    employeerepository.deleteById(employee.getId());
+    employeerepository.save(new Employee(employee.getId(),name,role,employee.getAssetname()));
+	return employee.getName();
+	
+} 
+public String recoverfromEmployee(Employee employee)   
+{  
+	
+    assetsrepository.findById(employee.getAssetname()).get().setAssignmentStatus(2);
+    String name=employeerepository.findById(employee.getId()).get().getName();
+    String role=employeerepository.findById(employee.getId()).get().getRole();
+    employeerepository.deleteById(employee.getId());
+    employeerepository.save(new Employee(employee.getId(),name,role,null));
+	return employee.getName();
+	}
+	
 
 }  
